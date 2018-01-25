@@ -1,0 +1,24 @@
+{
+    "name": "julong/pay",
+    "description": "laravel pay library",//PHP库描述
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lu Qiang",
+            "email": "345340585@qq.com"
+        }
+    ],
+	"autoload": {
+        "psr-4": {
+            "Julong\\Pay\\": "src"
+        }
+    },
+    "require": {
+        "illuminate/support": "^5.1",
+        "php": ">=7.0.0",
+        "julong/pay": "^2.0"
+    },
+    "support": {
+        "source": "https://github.com/julonglu/pay"
+    }
+}
