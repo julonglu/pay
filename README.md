@@ -3,7 +3,7 @@
     composer require julong/pay  
 ## use   
 
-    $config = \[  
+    $config = [  
       //应用ID,您的APPID。
       'app_id' => "2018011301825418",  
   
@@ -27,7 +27,7 @@
  
       //支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。  
       'alipay_public_key' => file_get_contents("/data/JULONG/JLSERVER/config/key/zfb_public_key.pem"),  
-    \];   
+    ];   
   //setParam($subject="test",$total_amount = "0.01",$body= "购买测试商品0.01元",$timeout_express = "1m")   
   
     $alipay = new pay($config); 
@@ -39,19 +39,19 @@
     $alipay = new pay($config);    
     $res = $alipay->returnUrl();   
 ### 返回   
-      return \[
+      return [
       'out_trade_no'=>'',//商户订单号
       'trade_no'=>'',//支付宝交易号
-      \];
+      ];
 
 ## 异步验证    
 ### 用法   
     $alipay = new pay($config);    
     $res = $alipay->checkSyncPay();   
 ### 返回     
-     return \[  
-      'out_trade_no'=>'',//商户订单号  
-      'trade_no'=>'',//支付宝交易号  
-      'trade_status'=>'',//交易状态  
-      \];   
+     return [  
+          'out_trade_no'=>'',//商户订单号  
+          'trade_no'=>'',//支付宝交易号  
+          'trade_status'=>'',//交易状态  
+        ];    
  
