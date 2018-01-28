@@ -40,9 +40,9 @@
     $res = $alipay->returnUrl();   
 ### 返回   
       return [
-      'out_trade_no'=>'',//商户订单号
-      'trade_no'=>'',//支付宝交易号
-      ];
+          'out_trade_no'=>'',//商户订单号
+          'trade_no'=>'',//支付宝交易号
+          ];
 
 ## 异步验证    
 ### 用法   
