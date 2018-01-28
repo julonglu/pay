@@ -31,3 +31,25 @@ $config = \[
 $alipay = new pay($config); 
 $content = $alipay->setParam()->toPay();   
 echo $content;   
+ 
+## 同步跳转    
+### 用法   
+$alipay = new pay($config);    
+$res = $alipay->returnUrl();   
+### 返回   
+  return \[
+      'out_trade_no'=>'',//商户订单号
+      'trade_no'=>'',//支付宝交易号
+      \];
+
+## 异步验证    
+### 用法   
+$alipay = new pay($config);    
+$res = $alipay->checkSyncPay();   
+### 返回     
+  return \[  
+      'out_trade_no'=>'',//商户订单号  
+      'trade_no'=>'',//支付宝交易号  
+      'trade_status'=>'',//交易状态  
+      \];   
+ 
