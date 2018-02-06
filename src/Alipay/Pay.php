@@ -32,9 +32,10 @@ class Pay implements PayBase {
      * @param string $timeout_express
      * @return $this
      */
-    function setParam($subject="test",$total_amount =  "0.01",$body= "购买测试商品0.01元",$timeout_express = "1m"){
+    function setParam($subject="test",$total_amount =  "0.01",$body= "购买测试商品0.01元",$timeout_express = "1m",$out_trade_no=null){
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
+        if($out_trade_no == null)
         $out_trade_no = date("YmdHis").rand(100,999);
 
         //订单名称，必填
@@ -65,7 +66,7 @@ class Pay implements PayBase {
     function toPay(){
         $config = $this->config;
         $this->payResponse = new AlipayTradeService($config);
-        $this->payResponse ->wapPay($this->payRequestBuilder,$config['return_url'],$config['notify_url']);
+        return $this->payResponse ->wapPay($this->payRequestBuilder,$config['return_url'],$config['notify_url']);
     }
 
 
