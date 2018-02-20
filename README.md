@@ -48,10 +48,32 @@
 ### 用法   
     $alipay = new pay($config);    
     $res = $alipay->checkSyncPay();   
+    
 ### 返回     
      return [  
           'out_trade_no'=>'',//商户订单号  
           'trade_no'=>'',//支付宝交易号  
           'trade_status'=>'',//交易状态  
         ];    
- 
+# 微信   
+## 用法  
+    $payModel = Pay::wechat()
+                         ->setParam(
+                          100,
+                          date('YmdHis')
+                         )->toPay();
+     echo ($payModel);
+    /**
+     * function setParam
+     * @param string $total_fee 总金额（元）
+     * @param string $out_trade_no 订单号
+     * @param string $body 标题如 武汉光谷-周黑鸭
+     * @param string $timeout_express 订单过期时间如201802202359
+     * @param string $fee_type 默认CNY
+     * @param string $attach 附加数据如 武汉光谷分店
+     * @param string $trade_type 默认MWEB
+     * @param string $detail  订单详情默认空
+     * @param string $device_info 设备号默认空
+     * @return $this
+     */
+     
