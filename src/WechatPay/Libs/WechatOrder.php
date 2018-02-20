@@ -38,8 +38,8 @@ class WechatOrder
             $result = "<script>alert({$result['err_msg']});window.history.back(-1);</script>";
         elseif(!empty($result['mweb_url']))
             $result = "<script>window.location.href='{$result['mweb_url']}'</script>";
-        elseif(!empty($result['']))
-	    $result = "<script>alert({$result['return_msg']});window.history.back(-1);</script>";
+        elseif(!empty($result['return_msg']))
+	    $result = "<script>alert('{$result['return_msg']}');window.history.back(-1);</script>";
 	else
             $result = "<script>alert('暂时无法支付，请联系商家处理');window.history.back(-1);</script>";
         return $result;
