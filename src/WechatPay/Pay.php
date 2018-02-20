@@ -30,7 +30,7 @@ class Pay implements PayBase {
         $this->config = $config;
     }
 
-    function setParam($total_fee='',$out_trade_no='',$body= "武汉光谷-周黑鸭",$timeout_express = '',$fee_type='CNY',$trade_type='',$attach='武汉光谷分店',$detail='',$device_info=''){
+    function setParam($total_fee='',$out_trade_no='',$body= "武汉光谷-周黑鸭",$timeout_express = '',$fee_type='CNY',$trade_type='MWEB',$attach='武汉光谷分店',$detail='',$device_info=''){
         $nonce_str = substr(md5(rand(10000,99999)),8,16);
         if(empty($timeout_express)) $timeout_express = date('YmdHis',time()+2*3600);
         $this->wechat_pay->setBody($body);
@@ -39,11 +39,12 @@ class Pay implements PayBase {
         $this->wechat_pay->setDetail($detail);
         $this->wechat_pay->setAttach($attach);
         $this->wechat_pay->setFeeType($fee_type);
-        $this->wechat_pay->setTotalFee($total_fee);
+        $this->wechat_pay->setTotalFee(intval(floatval($total_fee)*100));
         $this->wechat_pay->setSpbillCreateIp(Helper::get_client_ip());
         $this->wechat_pay->setTimeStart(date('YmdHis'));
         $this->wechat_pay->setTimeExpire($timeout_express);
         $this->wechat_pay->setTradeType($trade_type);
+        $this->wechat_pay->setOutTradeNo($out_trade_no);
         $this->wechat_pay->setSign($this->config['key']);
         return $this;
     }
