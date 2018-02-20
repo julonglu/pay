@@ -34,6 +34,13 @@ class WechatOrder
         if( !empty($result['result_code']) && !empty($result['err_code']) ){
             $result['err_msg'] = $this->error_code( $result['err_code'] );
         }
+
+        if(!empty($result['err_msg']))
+            $result = "<script>alert({$result['err_msg']});window.history.back(-1);</script>";
+        elseif(!empty($result['mweb_url']))
+            $result = "<script>window.location.href='{$result['mweb_url']}'</script>";
+        else
+            $result = "<script>alert('暂时无法支付，请联系商家处理');window.history.back(-1);</script>";
         return $result;
     }
 

@@ -49,11 +49,12 @@ class WechatSdk
      * @param string $mch_id
      * @param string $notify_url
      */
-    public function __construct ($appid, $mch_id, $notify_url)
+    public function __construct ($appid, $mch_id, $notify_url,$sign_type = 'MD5')
     {
         $this->appid = $appid;
         $this->mch_id = $mch_id;
         $this->notify_url = $notify_url;
+        $this->sign_type = $sign_type;
     }
 
 
@@ -165,7 +166,7 @@ class WechatSdk
         $stringA = http_build_query($arr);
         $stringSignTemp = $stringA.'&key='.$key;
         $this->sign = strtoupper(md5($stringSignTemp));
-        $this->sign_type = 'md5';
+
     }
 
     /**
