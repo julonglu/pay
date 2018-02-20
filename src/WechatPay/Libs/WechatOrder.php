@@ -26,7 +26,7 @@ class WechatOrder
     }
     public function checkPay() {
         $xml = Helper::arrayToXml($this->param);
-        $response = $this->postXmlCurl($xml,self::API_URL_PREFIX.self::UNIFIEDORDER_URL);
+        $response = $this->postXmlCurl($xml,self::API_URL_PREFIX.self::ORDERQUERY_URL);
         if( !$response ){
             return false;
         }
@@ -34,6 +34,7 @@ class WechatOrder
         if( !empty($result['result_code']) && !empty($result['err_code']) ){
             $result['err_msg'] = $this->error_code( $result['err_code'] );
         }
+        if(!empty($result['total_fee']))$result['total_fee'] = $result['total_fee']/100;
         return $result;
     }
     public function PayUrl() {

@@ -57,6 +57,7 @@
         ];    
 # 微信   
 ## 用法  
+### 支付
     $payModel = Pay::wechat()
                          ->setParam(
                           100,
@@ -78,3 +79,6 @@
      * @return $this
      */
      
+### 核验
+    $out_trade_no = 201802212359;
+    $payModel = Pay::wechat()->toCheck($out_trade_no);

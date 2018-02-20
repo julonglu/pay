@@ -58,12 +58,23 @@ class Pay implements PayBase {
         $this->wechat_pay->setTimeExpire($timeout_express);
         $this->wechat_pay->setTradeType($trade_type);
         $this->wechat_pay->setOutTradeNo($out_trade_no);
-        $this->wechat_pay->setSign($this->config['key']);
         $this->wechat_pay->setNotifyUrl($this->config['notify_url']);
         $this->wechat_pay->setRedirectUrl($redirectUrl);
+        $this->wechat_pay->setSign($this->config['key']);
         return $this;
     }
-    function toPay(){
+    function toCheck($out_trade_no=''){
+        $nonce_str = substr(md5(rand(10000,99999)),8,16);
+        $this->wechat_pay->setNonceStr($nonce_str);
+        if(!empty($out_trade_no))
+            $this->wechat_pay->setOutTradeNo($out_trade_no);
+        else
+            return ['err_msg'=>'订单号不能为空','code'=>-1];
+        $this->wechat_pay->setSign($this->config['key']);
+        $WechatOrder = new WechatOrder($this->wechat_pay);
+        return $WechatOrder->checkPay();
+    }
+    function toPay () {
         $WechatOrder = new WechatOrder($this->wechat_pay);
         return $WechatOrder->PayUrl();
     }
