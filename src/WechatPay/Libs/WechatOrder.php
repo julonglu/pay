@@ -30,7 +30,7 @@ class WechatOrder
         if( !$response ){
             return false;
         }
-        $result = $this->xml_to_data( $response );
+        $result = Helper::xmlToArray( $response );
         if( !empty($result['result_code']) && !empty($result['err_code']) ){
             $result['err_msg'] = $this->error_code( $result['err_code'] );
         }

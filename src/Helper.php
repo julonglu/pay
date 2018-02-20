@@ -21,6 +21,13 @@ class Helper
         }
         return $cip;
     }
+    //将XML转为array
+    static public function xmlToArray($xml)
+    {
+        //将XML转为array
+        $array_data = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        return $array_data;
+    }
     static function arrayToXml($arr,$dom=0,$item=0){
         if (!$dom){
             $dom = new DOMDocument("1.0");
