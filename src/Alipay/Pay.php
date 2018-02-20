@@ -15,12 +15,15 @@ use Julong\Pay\PayBase;
 /**
  * @property AlipayTradeWapPayContentBuilder payRequestBuilder
  * @property AlipayTradeService payResponse
+ * @property array config
  */
 class Pay implements PayBase {
     private $config;
+    private $payRequestBuilder = null;
     function __construct($config)
     {
         $this->config = $config;
+        $this->payRequestBuilder = new AlipayTradeWapPayContentBuilder();
     }
 
     /**
@@ -50,7 +53,7 @@ class Pay implements PayBase {
         //超时时间
 //        $timeout_express="1m";
 
-        $this->payRequestBuilder = new AlipayTradeWapPayContentBuilder();
+
         $this->payRequestBuilder->setBody($body);
         $this->payRequestBuilder->setSubject($subject);
         $this->payRequestBuilder->setOutTradeNo($out_trade_no);
