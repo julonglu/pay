@@ -28,7 +28,7 @@ class Helper
         $array_data = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
         return $array_data;
     }
-    /*static function arrayToXml($arr)
+    static function arrayToXml($arr)
     {
         $xml = "<xml>";
         foreach ($arr as $key=>$val)
@@ -43,8 +43,8 @@ class Helper
         }
         $xml.="</xml>";
         return $xml;
-    }*/
-
+    }
+/*
     static function arrayToXml($arr,$dom=0,$item=0){
         if (!$dom){
             $dom = new DOMDocument("1.0");
@@ -66,5 +66,5 @@ class Helper
         }
         return $dom->saveXML();
     }
-
+*/
 }

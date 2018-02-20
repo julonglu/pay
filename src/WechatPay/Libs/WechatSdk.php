@@ -160,13 +160,14 @@ class WechatSdk
         $keys = array_keys($param);
         sort($keys);
         $arr = [];
-        foreach ($keys as $key){
-            $arr[$key]=$param[$key];
+        foreach ($keys as $tkey){
+            $arr[$tkey]=$param[$tkey];
         }
-        $stringA = http_build_query($arr);
+        $stringA = urldecode(http_build_query($arr));
         $stringSignTemp = $stringA.'&key='.$key;
         $this->sign = strtoupper(md5($stringSignTemp));
-
+	$arr['sign'] = $this->sign;
+	$this->__sys_param = $arr;
     }
 
     /**
