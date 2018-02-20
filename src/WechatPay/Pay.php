@@ -26,7 +26,7 @@ class Pay implements PayBase {
     private $wechat_pay = null;
     function __construct($config)
     {
-        $this->wechat_pay = new WechatSdk($config['appid'],$config['mch_id'],$config['notify_url']);
+        $this->wechat_pay = new WechatSdk($config['appid'],$config['mch_id']);
         $this->config = $config;
     }
 
@@ -34,6 +34,7 @@ class Pay implements PayBase {
      * @param string $total_fee 总金额（元）
      * @param string $out_trade_no 订单号
      * @param string $body 标题如 武汉光谷-周黑鸭
+     * @param string $redirectUrl 支付完成同步跳转路径
      * @param string $timeout_express 订单过期时间如201802202359
      * @param string $fee_type 默认CNY
      * @param string $attach 附加数据如 武汉光谷分店
@@ -42,7 +43,7 @@ class Pay implements PayBase {
      * @param string $device_info 设备号默认空
      * @return $this
      */
-    function setParam($total_fee='',$out_trade_no='',$body= "武汉光谷-周黑鸭",$timeout_express = '',$fee_type='CNY',$attach='武汉光谷分店',$trade_type='MWEB',$device_info='',$detail=''){
+    function setParam($total_fee='',$out_trade_no='',$body= "武汉光谷-周黑鸭",$redirectUrl='',$timeout_express = '',$fee_type='CNY',$attach='武汉光谷分店',$trade_type='MWEB',$device_info='',$detail=''){
         $nonce_str = substr(md5(rand(10000,99999)),8,16);
         if(empty($timeout_express)) $timeout_express = date('YmdHis',time()+2*3600);
         $this->wechat_pay->setBody($body);
@@ -58,6 +59,8 @@ class Pay implements PayBase {
         $this->wechat_pay->setTradeType($trade_type);
         $this->wechat_pay->setOutTradeNo($out_trade_no);
         $this->wechat_pay->setSign($this->config['key']);
+        $this->wechat_pay->setNotifyUrl($this->config['notify_url']);
+        $this->wechat_pay->setRedirectUrl($redirectUrl);
         return $this;
     }
     function toPay(){

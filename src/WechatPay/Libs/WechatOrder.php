@@ -24,6 +24,18 @@ class WechatOrder
         $this->param = $wechatSdk->__sys_param;
 
     }
+    public function checkPay() {
+        $xml = Helper::arrayToXml($this->param);
+        $response = $this->postXmlCurl($xml,self::API_URL_PREFIX.self::UNIFIEDORDER_URL);
+        if( !$response ){
+            return false;
+        }
+        $result = Helper::xmlToArray( $response );
+        if( !empty($result['result_code']) && !empty($result['err_code']) ){
+            $result['err_msg'] = $this->error_code( $result['err_code'] );
+        }
+        return $result;
+    }
     public function PayUrl() {
         $xml = Helper::arrayToXml($this->param);
         $response = $this->postXmlCurl($xml,self::API_URL_PREFIX.self::UNIFIEDORDER_URL);

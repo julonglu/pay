@@ -68,6 +68,7 @@
      * @param string $total_fee 总金额（元）
      * @param string $out_trade_no 订单号
      * @param string $body 标题如 武汉光谷-周黑鸭
+     * @param string $redirectUrl 支付完成同步跳转路径
      * @param string $timeout_express 订单过期时间如201802202359
      * @param string $fee_type 默认CNY
      * @param string $attach 附加数据如 武汉光谷分店
